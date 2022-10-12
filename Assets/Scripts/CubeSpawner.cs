@@ -7,6 +7,7 @@ using UnityEngine.Pool;
 public class CubeSpawner : MonoBehaviour
 {
     [SerializeField] private Cube _cubePrefab;
+    [SerializeField] private float _timeIntervalInSeconds;
     private ObjectPool<Cube> _pool;
 
     private void Awake()
@@ -14,14 +15,9 @@ public class CubeSpawner : MonoBehaviour
         _pool = new ObjectPool<Cube>(Create, OnTakeFromPool, OnReturnFromPool);
     }
 
-    private void OnReturnFromPool(Cube cube)
+    private void Start()
     {
-        cube.gameObject.SetActive(false);
-    }
-
-    private void OnTakeFromPool(Cube cube)
-    {
-        cube.gameObject.SetActive(true);       
+        StartCoroutine(Spawn());
     }
 
     private Cube Create()
@@ -31,9 +27,17 @@ public class CubeSpawner : MonoBehaviour
         return cube;
     }
 
-    private void Spawn()
+    private void OnReturnFromPool(Cube cube) => cube.gameObject.SetActive(false);
+
+    private void OnTakeFromPool(Cube cube) => cube.gameObject.SetActive(true);
+
+    private IEnumerator Spawn()
     {
-        GetCube();
+        while (true)
+        {
+            GetCube();
+            yield return new WaitForSeconds(_timeIntervalInSeconds);
+        }       
     }
 
     private void GetCube() => _pool.Get();
