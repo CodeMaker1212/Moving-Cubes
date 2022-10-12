@@ -13,10 +13,7 @@ public class CubeSpawner : MonoBehaviour
     public float TimeIntervalInSeconds
     {
         get => _timeIntervalInSeconds;
-        private set
-        {
-            _timeIntervalInSeconds = Mathf.Clamp(value, 0, float.MaxValue);
-        }
+        private set => _timeIntervalInSeconds = Mathf.Clamp(value, 0, float.MaxValue);
     }
 
     private void Awake()
@@ -24,21 +21,22 @@ public class CubeSpawner : MonoBehaviour
         _pool = new ObjectPool<Cube>(Create, OnTakeFromPool, OnReturnFromPool);
     }
 
-    private void Start()
-    {
-        StartCoroutine(Spawn());
-    }
+    private void Start() => StartCoroutine(Spawn());
 
     private Cube Create()
     {
         var cube = Instantiate(_cubePrefab);
-        cube.SetPool(_pool);
+        cube.SetPool(_pool);      
         return cube;
     }
 
-    private void OnReturnFromPool(Cube cube) => cube.gameObject.SetActive(false);
+    private void OnReturnFromPool(Cube cube)
+    {
+        cube.gameObject.SetActive(false);
+        cube.transform.position = _cubePrefab.transform.position;
+    }
 
-    private void OnTakeFromPool(Cube cube) => cube.gameObject.SetActive(true);
+    private void OnTakeFromPool(Cube cube) => cube.gameObject.SetActive(true);   
 
     private IEnumerator Spawn()
     {
