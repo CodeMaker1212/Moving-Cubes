@@ -1,14 +1,9 @@
-using Newtonsoft.Json.Linq;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-using UnityEngine.Windows;
 
-public enum InputParameter {SpawnRate, Speed, Distance}
-public class UserInputData : MonoBehaviour
+public class UserInputConfig : MonoBehaviour
 {
     [SerializeField] private InputField _spawnTimeInterval;
     [SerializeField] private InputField _speed;
