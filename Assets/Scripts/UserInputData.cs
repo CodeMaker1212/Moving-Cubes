@@ -8,11 +8,11 @@ using UnityEngine.UI;
 using UnityEngine.Windows;
 
 public enum InputParameter {SpawnRate, Speed, Distance}
-public class UserInputHandler : MonoBehaviour
+public class UserInputData : MonoBehaviour
 {
-    [SerializeField] private InputField _spawnTimeIntervalField;
-    [SerializeField] private InputField _speedField;
-    [SerializeField] private InputField _distanceField;
+    [SerializeField] private InputField _spawnTimeInterval;
+    [SerializeField] private InputField _speed;
+    [SerializeField] private InputField _distance;
 
     public event UnityAction<int> SpawnTimeIntervalEntered;
     public event UnityAction<int> SpeedEntered;
@@ -20,13 +20,13 @@ public class UserInputHandler : MonoBehaviour
 
     private void Awake()
     {
-        _spawnTimeIntervalField.contentType = InputField.ContentType.IntegerNumber;
-        _speedField.contentType = InputField.ContentType.IntegerNumber;
-        _distanceField.contentType = InputField.ContentType.IntegerNumber;
+        _spawnTimeInterval.contentType = InputField.ContentType.IntegerNumber;
+        _speed.contentType = InputField.ContentType.IntegerNumber;
+        _distance.contentType = InputField.ContentType.IntegerNumber;
 
-        _spawnTimeIntervalField.onEndEdit.AddListener(OnSpawnTimeIntervalEndEdit);
-        _speedField.onEndEdit.AddListener(OnSpeedEndEdit);
-        _distanceField.onEndEdit.AddListener(OnDistanceEndEdit);
+        _spawnTimeInterval.onEndEdit.AddListener(OnSpawnTimeIntervalEndEdit);
+        _speed.onEndEdit.AddListener(OnSpeedEndEdit);
+        _distance.onEndEdit.AddListener(OnDistanceEndEdit);
     }
 
     private void OnSpawnTimeIntervalEndEdit(string input) => SpawnTimeIntervalEntered?.Invoke(GetIntegerFrom(input));

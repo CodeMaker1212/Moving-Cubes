@@ -401,7 +401,7 @@ GameObject:
   - component: {fileID: 410681811}
   - component: {fileID: 410681810}
   m_Layer: 5
-  m_Name: Spawn Rate Input Field
+  m_Name: Spawn Time Interval Input Field
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1857,9 +1857,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9ac94cb7aab51a4ca44129828849b44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnRateField: {fileID: 410681810}
-  _speedField: {fileID: 404578569}
-  _distanceField: {fileID: 1264015910}
+  _spawnTimeInterval: {fileID: 410681810}
+  _speed: {fileID: 404578569}
+  _distance: {fileID: 1264015910}
 --- !u!1 &1954450237
 GameObject:
   m_ObjectHideFlags: 0
@@ -1928,7 +1928,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cubePrefab: {fileID: 1451320113, guid: efe80ee3ccd76a346b985ecc37f32438, type: 3}
-  _userInputHandler: {fileID: 1810887621}
+  _inputData: {fileID: 1810887621}
 --- !u!4 &1980436289
 Transform:
   m_ObjectHideFlags: 0

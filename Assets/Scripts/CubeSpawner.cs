@@ -7,20 +7,20 @@ using UnityEngine.Pool;
 public class CubeSpawner : MonoBehaviour
 {
     private const int _minTimeInterval = 1;
-    private const int _maxRate = int.MaxValue;
+    private const int _maxTimeInterval = int.MaxValue;
 
     [SerializeField] private Cube _cubePrefab;   
-    [SerializeField] private UserInputHandler _userInputHandler;
+    [SerializeField] private UserInputData _inputData;
     private int _timeInterval = _minTimeInterval;
     private ObjectPool<Cube> _pool;
     private Coroutine _spawn;
 
-    public int Rate
+    public int TimeInterval
     {
         get => _timeInterval;
         private set
         {
-            _timeInterval = Mathf.Clamp(value, 0, _maxRate);
+            _timeInterval = Mathf.Clamp(value, 0, _maxTimeInterval);
 
             if(value >= _minTimeInterval && _spawn == null)
                _spawn = StartCoroutine(Spawn());
@@ -30,7 +30,7 @@ public class CubeSpawner : MonoBehaviour
     private void Awake()
     {
         _pool = new ObjectPool<Cube>(Create, OnTakeFromPool, OnReturnFromPool);
-        _userInputHandler.SpawnTimeIntervalEntered += OnUserEnteredTimeInterval;
+        _inputData.SpawnTimeIntervalEntered += OnUserEnteredTimeInterval;
     }
 
     private void Start() => _spawn = StartCoroutine(Spawn());
@@ -50,14 +50,14 @@ public class CubeSpawner : MonoBehaviour
 
     private void OnTakeFromPool(Cube cube) => cube.gameObject.SetActive(true);
 
-    private void OnUserEnteredTimeInterval(int interval) => Rate = interval;
+    private void OnUserEnteredTimeInterval(int interval) => TimeInterval = interval;
 
     private IEnumerator Spawn()
     {
-        while (Rate > 0)
+        while (TimeInterval > 0)
         {
             GetCube();
-            yield return new WaitForSeconds(Rate);
+            yield return new WaitForSeconds(TimeInterval);
         }   
         _spawn = null;
     }
