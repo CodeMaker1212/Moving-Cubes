@@ -7,8 +7,17 @@ using UnityEngine.Pool;
 public class CubeSpawner : MonoBehaviour
 {
     [SerializeField] private Cube _cubePrefab;
-    [SerializeField] private float _timeIntervalInSeconds;
+    [SerializeField][Range(0, 5f)] private float _timeIntervalInSeconds = 1f;
     private ObjectPool<Cube> _pool;
+
+    public float TimeIntervalInSeconds
+    {
+        get => _timeIntervalInSeconds;
+        private set
+        {
+            _timeIntervalInSeconds = Mathf.Clamp(value, 0, float.MaxValue);
+        }
+    }
 
     private void Awake()
     {
@@ -36,7 +45,7 @@ public class CubeSpawner : MonoBehaviour
         while (true)
         {
             GetCube();
-            yield return new WaitForSeconds(_timeIntervalInSeconds);
+            yield return new WaitForSeconds(TimeIntervalInSeconds);
         }       
     }
 
