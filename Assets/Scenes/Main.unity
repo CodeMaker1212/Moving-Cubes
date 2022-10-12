@@ -232,7 +232,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter value...
+  m_Text: meters
 --- !u!222 &220883319
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -606,7 +606,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter value...
+  m_Text: seconds
 --- !u!222 &444551336
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1097,7 +1097,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter value...
+  m_Text: m / s
 --- !u!222 &921846190
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1421,7 +1421,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Spawn rate
+  m_Text: Spawn time interval
 --- !u!222 &1077655587
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1870,7 +1870,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1954450238}
   m_Layer: 5
-  m_Name: Spawn Rate
+  m_Name: Spawn Time Interval
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

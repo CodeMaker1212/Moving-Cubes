@@ -22,7 +22,7 @@ public class CubeSpawner : MonoBehaviour
         {
             _rate = Mathf.Clamp(value, 0, _maxRate);
 
-            if(value > 0 && _spawn == null)
+            if(value >= _minRate && _spawn == null)
                _spawn = StartCoroutine(Spawn());
         } 
     }
