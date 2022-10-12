@@ -7,7 +7,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEngine.Windows;
 
-public enum InputParameter { SpawnRate, Speed, Distance}
+public enum InputParameter {SpawnRate, Speed, Distance}
 public class UserInputHandler : MonoBehaviour
 {
     [SerializeField] private InputField _spawnRateField;
@@ -43,7 +43,7 @@ public class UserInputHandler : MonoBehaviour
         }
         catch
         {
-            return default(int);
+            return default;
         }
     }
 }

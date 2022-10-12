@@ -13,20 +13,27 @@ public class CubeSpawner : MonoBehaviour
     [SerializeField] private UserInputHandler _userInputHandler;
     private int _rate = _minRate;
     private ObjectPool<Cube> _pool;
+    private Coroutine _spawn;
 
     public int Rate
     {
         get => _rate;
-        private set => _rate = Mathf.Clamp(value, _minRate, _maxRate);
+        private set
+        {
+            _rate = Mathf.Clamp(value, 0, _maxRate);
+
+            if(value > 0 && _spawn == null)
+               _spawn = StartCoroutine(Spawn());
+        } 
     }
 
     private void Awake()
     {
         _pool = new ObjectPool<Cube>(Create, OnTakeFromPool, OnReturnFromPool);
-        _userInputHandler.SpawnRateEntered += OnUserChangedTimeInterval;
+        _userInputHandler.SpawnRateEntered += OnUserEnteredRate;
     }
 
-    private void Start() => StartCoroutine(Spawn());
+    private void Start() => _spawn = StartCoroutine(Spawn());
 
     private Cube Create()
     {
@@ -43,15 +50,16 @@ public class CubeSpawner : MonoBehaviour
 
     private void OnTakeFromPool(Cube cube) => cube.gameObject.SetActive(true);
 
-    private void OnUserChangedTimeInterval(int interval) => Rate = interval;
+    private void OnUserEnteredRate(int interval) => Rate = interval;
 
     private IEnumerator Spawn()
     {
-        while (true)
+        while (Rate > 0)
         {
             GetCube();
             yield return new WaitForSeconds(Rate);
-        }       
+        }   
+        _spawn = null;
     }
 
     private void GetCube() => _pool.Get();   
