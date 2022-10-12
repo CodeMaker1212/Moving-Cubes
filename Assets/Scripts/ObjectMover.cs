@@ -27,17 +27,18 @@ public class ObjectMover : MonoBehaviour
     private void OnEnable()
     {
         _targetPosition = transform.position + Vector3.forward * Distance;
-        StartCoroutine(Move());
+        StartCoroutine(MoveForwardToTargetPoint());
     }
 
-    private void OnDisable() => StopCoroutine(Move());
+    private void OnDisable() => StopCoroutine(MoveForwardToTargetPoint());
 
-    private IEnumerator Move()
+    private IEnumerator MoveForwardToTargetPoint()
     {
-        while (transform.position.z < _targetPosition.z)
+        var waitForEndOfFrame = new WaitForEndOfFrame();
+        while (transform.localPosition.z < _targetPosition.z)
         {
-            transform.position = Vector3.MoveTowards(transform.position, _targetPosition, Speed);
-            yield return new WaitForEndOfFrame();
+            transform.localPosition = Vector3.MoveTowards(transform.localPosition, _targetPosition, Speed);
+            yield return waitForEndOfFrame;
         }
         TargetDistanceCovered?.Invoke();
     }
