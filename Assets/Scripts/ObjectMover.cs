@@ -1,13 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class ObjectMover : MonoBehaviour
 {
-    [SerializeField][Range(0f, 100f)] private float _speed = 5f;
-    [SerializeField][Range(0f, 10f)] private float _distance = 10f;
+    private float _speed;
+    private float _distance;
+    private UserInputData _inputData;
     private Vector3 _targetPosition;
 
     public event UnityAction TargetDistanceCovered;
@@ -27,6 +26,11 @@ public class ObjectMover : MonoBehaviour
     private void OnEnable()
     {
         _targetPosition = transform.position + Vector3.forward * Distance;
+        _inputData = FindObjectOfType<UserInputData>();
+        _inputData.SpeedUpdated += OnUserUpdatedSpeed;
+        _inputData.DistanceUpdated += OnUserUpdatedDistance;
+        Speed = _inputData.Speed;
+      
         StartCoroutine(MoveForwardToTargetPoint());
     }
 
@@ -42,4 +46,8 @@ public class ObjectMover : MonoBehaviour
         }
         TargetDistanceCovered?.Invoke();
     }
+
+    private void OnUserUpdatedSpeed(int value) => Speed = value;
+
+    private void OnUserUpdatedDistance(int value) => Distance = value;
 }

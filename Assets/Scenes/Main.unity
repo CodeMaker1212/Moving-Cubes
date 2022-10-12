@@ -819,7 +819,7 @@ GameObject:
   - component: {fileID: 782457411}
   - component: {fileID: 782457410}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: Time Interval Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1282,7 +1282,7 @@ GameObject:
   - component: {fileID: 1062254419}
   - component: {fileID: 1062254418}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: Distance Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1657,8 +1657,8 @@ GameObject:
   - component: {fileID: 1636197671}
   - component: {fileID: 1636197670}
   m_Layer: 5
-  m_Name: Text (Legacy)
-  m_TagString: Untagged
+  m_Name: Speed Text
+  m_TagString: Speed Input Data
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1857,9 +1857,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9ac94cb7aab51a4ca44129828849b44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnTimeInterval: {fileID: 410681810}
-  _speed: {fileID: 404578569}
-  _distance: {fileID: 1264015910}
+  _spawnTimeIntervalInput: {fileID: 410681810}
+  _speedInput: {fileID: 404578569}
+  _distanceInput: {fileID: 1264015910}
+  _spawnTimeInterval: {fileID: 782457410}
+  _speed: {fileID: 1636197670}
+  _distance: {fileID: 1062254418}
 --- !u!1 &1954450237
 GameObject:
   m_ObjectHideFlags: 0
@@ -1928,7 +1931,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cubePrefab: {fileID: 1451320113, guid: efe80ee3ccd76a346b985ecc37f32438, type: 3}
-  _inputData: {fileID: 1810887621}
+  _userData: {fileID: 1810887621}
 --- !u!4 &1980436289
 Transform:
   m_ObjectHideFlags: 0

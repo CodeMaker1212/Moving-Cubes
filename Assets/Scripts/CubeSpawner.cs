@@ -10,7 +10,7 @@ public class CubeSpawner : MonoBehaviour
     private const int _maxTimeInterval = int.MaxValue;
 
     [SerializeField] private Cube _cubePrefab;   
-    [SerializeField] private UserInputData _inputData;
+    [SerializeField] private UserInputData _userData;
     private int _timeInterval = _minTimeInterval;
     private ObjectPool<Cube> _pool;
     private Coroutine _spawn;
@@ -30,7 +30,7 @@ public class CubeSpawner : MonoBehaviour
     private void Awake()
     {
         _pool = new ObjectPool<Cube>(Create, OnTakeFromPool, OnReturnFromPool);
-        _inputData.SpawnTimeIntervalEntered += OnUserEnteredTimeInterval;
+        _userData.SpawnTimeIntervalEntered += OnUserUpdatedTimeInterval;
     }
 
     private void Start() => _spawn = StartCoroutine(Spawn());
@@ -50,7 +50,7 @@ public class CubeSpawner : MonoBehaviour
 
     private void OnTakeFromPool(Cube cube) => cube.gameObject.SetActive(true);
 
-    private void OnUserEnteredTimeInterval(int interval) => TimeInterval = interval;
+    private void OnUserUpdatedTimeInterval(int interval) => TimeInterval = interval;
 
     private IEnumerator Spawn()
     {
