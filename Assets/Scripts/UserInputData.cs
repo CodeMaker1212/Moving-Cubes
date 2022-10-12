@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class UserInputConfig : MonoBehaviour
+public class UserInputData : MonoBehaviour
 {
     [SerializeField] private InputField _spawnTimeInterval;
     [SerializeField] private InputField _speed;

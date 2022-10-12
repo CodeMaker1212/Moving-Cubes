@@ -10,7 +10,7 @@ public class CubeSpawner : MonoBehaviour
     private const int _maxTimeInterval = int.MaxValue;
 
     [SerializeField] private Cube _cubePrefab;   
-    [SerializeField] private UserInputConfig _inputData;
+    [SerializeField] private UserInputData _inputData;
     private int _timeInterval = _minTimeInterval;
     private ObjectPool<Cube> _pool;
     private Coroutine _spawn;
