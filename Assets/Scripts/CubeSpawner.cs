@@ -6,23 +6,23 @@ using UnityEngine.Pool;
 
 public class CubeSpawner : MonoBehaviour
 {
-    private const int _minRate = 1;
+    private const int _minTimeInterval = 1;
     private const int _maxRate = int.MaxValue;
 
     [SerializeField] private Cube _cubePrefab;   
     [SerializeField] private UserInputHandler _userInputHandler;
-    private int _rate = _minRate;
+    private int _timeInterval = _minTimeInterval;
     private ObjectPool<Cube> _pool;
     private Coroutine _spawn;
 
     public int Rate
     {
-        get => _rate;
+        get => _timeInterval;
         private set
         {
-            _rate = Mathf.Clamp(value, 0, _maxRate);
+            _timeInterval = Mathf.Clamp(value, 0, _maxRate);
 
-            if(value >= _minRate && _spawn == null)
+            if(value >= _minTimeInterval && _spawn == null)
                _spawn = StartCoroutine(Spawn());
         } 
     }
@@ -30,7 +30,7 @@ public class CubeSpawner : MonoBehaviour
     private void Awake()
     {
         _pool = new ObjectPool<Cube>(Create, OnTakeFromPool, OnReturnFromPool);
-        _userInputHandler.SpawnRateEntered += OnUserEnteredRate;
+        _userInputHandler.SpawnTimeIntervalEntered += OnUserEnteredTimeInterval;
     }
 
     private void Start() => _spawn = StartCoroutine(Spawn());
@@ -50,7 +50,7 @@ public class CubeSpawner : MonoBehaviour
 
     private void OnTakeFromPool(Cube cube) => cube.gameObject.SetActive(true);
 
-    private void OnUserEnteredRate(int interval) => Rate = interval;
+    private void OnUserEnteredTimeInterval(int interval) => Rate = interval;
 
     private IEnumerator Spawn()
     {
