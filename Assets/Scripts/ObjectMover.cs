@@ -24,15 +24,21 @@ public class ObjectMover : MonoBehaviour
         private set => _distance = Mathf.Clamp(value, 0, float.MaxValue);
     }
      
-    private void OnEnable() => _targetPosition = transform.position + Vector3.forward * Distance;
-
-    private void Update()
+    private void OnEnable()
     {
-        if (enabled)
+        _targetPosition = transform.position + Vector3.forward * Distance;
+        StartCoroutine(Move());
+    }
+
+    private void OnDisable() => StopCoroutine(Move());
+
+    private IEnumerator Move()
+    {
+        while (transform.position.z < _targetPosition.z)
         {
             transform.position = Vector3.MoveTowards(transform.position, _targetPosition, Speed);
-            if (transform.position.z == _targetPosition.z)
-                TargetDistanceCovered?.Invoke();
-        }          
+            yield return new WaitForEndOfFrame();
+        }
+        TargetDistanceCovered?.Invoke();
     }
 }
