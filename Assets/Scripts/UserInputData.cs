@@ -8,13 +8,40 @@ public class UserInputData : MonoBehaviour
     [SerializeField] private InputField _spawnTimeIntervalInput;
     [SerializeField] private InputField _speedInput;
     [SerializeField] private InputField _distanceInput;
-    [SerializeField] private Text _spawnTimeInterval;
-    [SerializeField] private Text _speed;
-    [SerializeField] private Text _distance;
 
-    public int SpawnTimeInterval => Convert.ToInt32(_spawnTimeInterval.text);
-    public int Speed => Convert.ToInt32(_speed.text);
-    public int Distance => Convert.ToInt32(_distance.text);
+    private int _spawnTimeInterval = 1;
+    private int _speed = 1;
+    private int _distance = 1;
+
+    public int SpawnTimeInterval
+    {
+        get => _spawnTimeInterval;
+        private set
+        {
+            _spawnTimeInterval = value;
+            SpawnTimeIntervalEntered?.Invoke(_spawnTimeInterval);
+        }
+    }
+
+    public int Speed
+    {
+        get => _speed;
+        private set
+        {
+            _speed = Mathf.Clamp(value, 0, int.MaxValue);
+            SpeedUpdated?.Invoke(_speed);
+        }
+    }
+
+    public int Distance
+    {
+        get => _distance;
+        private set
+        {
+            _distance = Mathf.Clamp(value, 0, int.MaxValue);
+            DistanceUpdated?.Invoke(_distance);
+        }
+    }
 
     public event UnityAction<int> SpawnTimeIntervalEntered;
     public event UnityAction<int> SpeedUpdated;
@@ -31,11 +58,11 @@ public class UserInputData : MonoBehaviour
         _distanceInput.onEndEdit.AddListener(OnDistanceEndEdit);
     }
 
-    private void OnSpawnTimeIntervalEndEdit(string input) => SpawnTimeIntervalEntered?.Invoke(GetIntegerFrom(input));
+    private void OnSpawnTimeIntervalEndEdit(string input) => SpawnTimeInterval = GetIntegerFrom(input);
 
-    private void OnSpeedEndEdit(string input) => SpeedUpdated?.Invoke(GetIntegerFrom(input));
+    private void OnSpeedEndEdit(string input) => Speed = GetIntegerFrom(input);
 
-    private void OnDistanceEndEdit(string input) => DistanceUpdated?.Invoke(GetIntegerFrom(input));
+    private void OnDistanceEndEdit(string input) => Distance = GetIntegerFrom(input);
 
     private int GetIntegerFrom(string value)
     {

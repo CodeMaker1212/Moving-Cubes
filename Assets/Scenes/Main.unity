@@ -232,7 +232,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: meters
+  m_Text: Enter value...
 --- !u!222 &220883319
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -606,7 +606,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: seconds
+  m_Text: Enter value...
 --- !u!222 &444551336
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1097,7 +1097,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: m / s
+  m_Text: Enter value...
 --- !u!222 &921846190
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1261,7 +1261,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Distance
+  m_Text: Distance (m)
 --- !u!222 &1054715189
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1421,7 +1421,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Spawn time interval
+  m_Text: Spawn time interval (seconds)
 --- !u!222 &1077655587
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1796,7 +1796,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Speed
+  m_Text: Speed (m/s)
 --- !u!222 &1730918389
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1860,9 +1860,6 @@ MonoBehaviour:
   _spawnTimeIntervalInput: {fileID: 410681810}
   _speedInput: {fileID: 404578569}
   _distanceInput: {fileID: 1264015910}
-  _spawnTimeInterval: {fileID: 782457410}
-  _speed: {fileID: 1636197670}
-  _distance: {fileID: 1062254418}
 --- !u!1 &1954450237
 GameObject:
   m_ObjectHideFlags: 0
